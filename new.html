@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRIME Properties — Real Estate Consultants in Navi Mumbai</title>
+  <meta name="description" content="PRIME Properties India is one of the leading real estate search & advisory firms based in Navi Mumbai, dealing in Commercial & Residential properties for over 20 years.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:            #0A0A0A;
+      --bg-card:       #141414;
+      --bg-card-alt:   #1A1A1A;
+      --surface-hover: #1F1F1F;
+      --border:        rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.13);
+      --text-primary:    #F2F0EC;
+      --text-secondary:  #888888;
+      --text-muted:      #505050;
+      --amber:         #FFAB00;
+      --amber-dim:     #CC8800;
+      --amber-glow:    rgba(255,171,0,0.12);
+      --radius-card:  18px;
+      --radius-btn:   100px;
+      --radius-img:   14px;
+      --nav-h:    66px;
+      --container: 1280px;
+      --gap:       14px;
+      --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-primary); font-size: 15px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 60px; }
+
+    /* Uniform section label for ALL sections */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 1.5px;
+      background: var(--amber); border-radius: 2px; flex-shrink: 0;
+    }
+    .section-title { font-size: clamp(24px, 3vw, 46px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); }
+    .section-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.65; max-width: 480px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 600; transition: background var(--transition), color var(--transition), transform var(--transition); white-space: nowrap; }
+    .btn-amber { background: var(--amber); color: #000; }
+    .btn-amber:hover { background: #FFB833; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text-primary); border: 1.5px solid var(--border-strong); }
+    .btn-outline:hover { background: var(--surface-hover); transform: translateY(-1px); }
+    .btn-dark { background: var(--amber); color: #000; }
+    .btn-dark:hover { background: #FFB833; transform: translateY(-1px); }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1), transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    /* ============ NAVBAR ============ */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(10,10,10,0.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav-inner { max-width: var(--container); margin: 0 auto; padding: 0 60px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+
+    /* Logo — square with gradient border glow */
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-square {
+      width: 40px; height: 40px; border-radius: 10px;
+      position: relative; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-square::before {
+      content: ''; position: absolute; inset: -1.5px; border-radius: 11.5px;
+      background: linear-gradient(135deg, #FFAB00 0%, #FF6B00 50%, #CC7700 100%);
+      z-index: 0;
+    }
+    .nav-logo-square::after { content: ''; position: absolute; inset: 0; border-radius: 10px; background: var(--bg-card); z-index: 1; }
+    .nav-logo-square svg { position: relative; z-index: 2; width: 20px; height: 20px; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-prime { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.07em; }
+    .nav-logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a { font-size: 13.5px; font-weight: 400; color: var(--text-secondary); transition: color var(--transition); }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta { margin-left: 14px; }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-card); border-top: 1px solid var(--border); padding: 20px 24px 28px; z-index: 99; flex-direction: column; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { padding: 14px 0; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+    .nav-mobile .btn-dark { margin-top: 20px; align-self: flex-start; }
+
+    /* ============ HERO ============ */
+    .hero { padding-top: calc(var(--nav-h) + 60px); overflow: hidden; }
+    .hero-inner { max-width: var(--container); margin: 0 auto; padding: 0 60px; }
+    .hero-top { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 48px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 100px; border: 1px solid rgba(255,171,0,0.25); background: rgba(255,171,0,0.07); font-size: 12px; font-weight: 500; color: var(--amber); margin-bottom: 24px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; box-shadow: 0 0 8px var(--amber); }
+    .hero-badge-stars { display: inline-flex; gap: 2px; align-items: center; margin-left: 4px; }
+    .hero-badge-star { width: 11px; height: 11px; fill: var(--amber); }
+    .hero-h1 { font-size: clamp(34px, 4.5vw, 62px); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 18px; }
+    .hero-h1 em { font-style: normal; color: var(--amber); }
+    .hero-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.7; max-width: 420px; margin-bottom: 32px; }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .hero-right { border-radius: var(--radius-card); overflow: hidden; }
+    .hero-right img { width: 100%; height: 420px; object-fit: cover; display: block; }
+
+    .hero-ticker { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; }
+    .hero-ticker-track { display: flex; align-items: center; width: max-content; animation: ticker 32s linear infinite; }
+    .hero-ticker-item { display: inline-flex; align-items: center; gap: 22px; padding: 0 26px; font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+    .hero-ticker-item::after { content: ''; display: block; width: 3px; height: 3px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Bento */
+    .hero-bento { display: grid; grid-template-columns: repeat(12,1fr); gap: var(--gap); padding: 16px 60px 60px; max-width: var(--container); margin: 0 auto; }
+    .bento-card { background: var(--bg-card); border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--border); }
+    .bento-card.is-image { border: none; }
+    .bento-card.is-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-card); }
+    .bento-stat { padding: 22px; display: flex; flex-direction: column; justify-content: space-between; min-height: 170px; }
+    .bento-stat-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+    .bento-stat-icon svg { width: 18px; height: 18px; stroke: var(--amber); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .bento-stat-num { font-size: clamp(38px, 4vw, 56px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--text-primary); margin-top: auto; }
+    .bento-stat-label { font-size: 12.5px; color: var(--text-secondary); margin-top: 4px; }
+    .bc-stat1 { grid-column: 1/5; grid-row: 1; }
+    .bc-stat2 { grid-column: 5/9; grid-row: 1; }
+    .bc-img1  { grid-column: 9/13; grid-row: 1/3; }
+    .bc-img2  { grid-column: 1/7; grid-row: 2; min-height: 210px; }
+    .bc-stat3 { grid-column: 7/10; grid-row: 2; }
+    .bc-stat4 { grid-column: 10/13; grid-row: 2; }
+
+    /* ============ ABOUT ============ */
+    .intro { padding: 100px 60px; }
+    .intro-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .intro-body { font-size: 15px; color: var(--text-secondary); line-height: 1.75; }
+    .intro-body p + p { margin-top: 16px; }
+    .intro-body blockquote { margin-top: 22px; padding: 16px 20px; border-left: 2px solid var(--amber); background: var(--amber-glow); border-radius: 0 10px 10px 0; font-style: italic; color: var(--text-primary); font-size: 13.5px; line-height: 1.75; }
+    .intro-cta { margin-top: 28px; }
+    .intro-images { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-radius: var(--radius-card); overflow: hidden; }
+    .intro-img { height: 200px; border-radius: var(--radius-img); overflow: hidden; background: var(--bg-card); }
+    .intro-img img { width: 100%; height: 100%; object-fit: cover; }
+    .intro-img.tall { grid-row: span 2; height: 100%; }
+
+    /* ============ PROPERTIES ============ */
+    .properties { padding: 100px 60px; }
+    .properties-header { margin-bottom: 36px; }
+    .properties-header .section-sub { margin-top: 12px; font-size: 14px; }
+    .properties-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap); }
+    .prop-card { border-radius: var(--radius-card); overflow: hidden; position: relative; display: block; aspect-ratio: 3/4; background: var(--bg-card); transition: transform var(--transition); }
+    .prop-card:hover { transform: translateY(-4px); }
+    .prop-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .prop-card:hover .prop-card-img { transform: scale(1.04); }
+    .prop-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 78%); }
+    .prop-badge { position: absolute; top: 14px; right: 14px; padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; background: var(--amber); color: #000; letter-spacing: 0.03em; }
+    .prop-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px; }
+    .prop-title { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.02em; margin-bottom: 5px; }
+    .prop-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .prop-meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.12); }
+    .prop-meta-item { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: rgba(255,255,255,0.82); background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.13); border-radius: 100px; padding: 4px 10px; white-space: nowrap; }
+    .prop-meta-item svg { width: 11px; height: 11px; stroke: rgba(255,255,255,0.8); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* ============ HOW IT WORKS ============ */
+    .how { padding: 100px 60px; }
+    .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .how-tabs { display: flex; flex-direction: column; margin-top: 32px; }
+    .how-tab { padding: 22px 0; border-top: 1px solid var(--border); cursor: pointer; transition: opacity var(--transition); }
+    .how-tab:last-child { border-bottom: 1px solid var(--border); }
+    .how-tab-num { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 7px; transition: color var(--transition); }
+    .how-tab-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+    .how-tab-body { font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; margin-top: 0; }
+    .how-tab.active .how-tab-body { max-height: 200px; margin-top: 10px; }
+    .how-tab.active .how-tab-num { color: var(--amber); }
+    .how-tab:not(.active) { opacity: 0.4; }
+    .how-tab:hover:not(.active) { opacity: 0.72; }
+    .how-right { position: sticky; top: calc(var(--nav-h) + 24px); }
+    .how-img-wrap { border-radius: var(--radius-card); overflow: hidden; height: 400px; }
+    .how-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+
+    /* ============ SERVICES ============ */
+    .services { padding: 100px 60px; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; gap: 24px; }
+    .services-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--gap); }
+    .service-card-featured { grid-column: 1/-1; }
+    .service-card { border-radius: var(--radius-card); overflow: hidden; position: relative; background: var(--bg-card); transition: transform var(--transition); }
+    .service-card:hover { transform: translateY(-3px); }
+    .service-card-featured .service-img { height: 340px; }
+    .service-img { height: 270px; overflow: hidden; position: relative; }
+    .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); display: block; }
+    .service-card:hover .service-img img { transform: scale(1.04); }
+    .service-body { position: absolute; bottom: 14px; left: 14px; right: 14px; background: var(--bg-card); border-radius: 12px; padding: 16px 18px; border: 1px solid var(--border); }
+    .service-title { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .service-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ============ TESTIMONIALS — uniform header ============ */
+    .testimonials { padding: 100px 60px; }
+    .testimonials-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; gap: 24px; }
+    .testimonials-header-left { flex: 1; }
+    .google-rating-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--amber-glow); border: 1px solid rgba(255,171,0,0.22); border-radius: 100px; padding: 8px 16px; font-size: 12.5px; color: var(--amber); font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+    .google-g { width: 20px; height: 20px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #4285F4; font-family: Arial, sans-serif; flex-shrink: 0; }
+    .testimonial-featured { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); display: grid; grid-template-columns: 1fr 1.3fr; overflow: hidden; margin-bottom: 14px; min-height: 340px; }
+    .testimonial-featured-img { overflow: hidden; }
+    .testimonial-featured-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .testimonial-featured-content { padding: 40px 44px; display: flex; flex-direction: column; justify-content: space-between; }
+    .testimonial-quote { font-size: clamp(14px, 1.5vw, 18px); font-weight: 400; line-height: 1.68; color: var(--text-primary); flex: 1; }
+    .testimonial-quote::before { content: '\201C'; color: var(--amber); }
+    .testimonial-quote::after  { content: '\201D'; color: var(--amber); }
+    .testimonial-featured-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+    .testimonial-author { font-size: 13.5px; font-weight: 600; color: var(--text-primary); }
+    .testimonial-role { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .testimonial-nav { display: flex; gap: 8px; }
+    .testimonial-nav-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-strong); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--transition), border-color var(--transition); font-size: 14px; color: var(--text-primary); }
+    .testimonial-nav-btn:hover { background: var(--surface-hover); border-color: var(--amber); }
+    .testimonial-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap); }
+    .t-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 22px; transition: transform var(--transition), border-color var(--transition); }
+    .t-card:hover { transform: translateY(-3px); border-color: rgba(255,171,0,0.2); }
+    .t-stars { display: flex; gap: 3px; margin-bottom: 12px; }
+    .t-star { width: 13px; height: 13px; color: var(--amber); }
+    .t-card-quote { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px; }
+    .t-card-author { display: flex; align-items: center; gap: 10px; }
+    .t-card-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--surface-hover); border: 1px solid rgba(255,171,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--amber); flex-shrink: 0; }
+    .t-card-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .t-card-role { font-size: 11.5px; color: var(--text-secondary); }
+    .reviews-cta { margin-top: 24px; }
+    .reviews-cta a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--amber); font-weight: 500; transition: opacity var(--transition); }
+    .reviews-cta a:hover { opacity: 0.7; }
+
+    /* ============ FAQ ============ */
+    .faq { padding: 100px 60px; }
+    .faq-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+    .faq-cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 28px; margin-top: 32px; }
+    .faq-icon-circle { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,171,0,0.3); background: var(--amber-glow); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .faq-icon-circle svg { width: 19px; height: 19px; stroke: var(--amber); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .faq-cta-label { font-size: 14px; color: var(--text-primary); margin-bottom: 18px; line-height: 1.6; font-weight: 500; }
+    .faq-cta-contact { font-size: 12px; color: var(--text-secondary); margin-top: 12px; line-height: 1.7; }
+    .faq-cta-contact a { color: var(--amber); transition: opacity var(--transition); }
+    .faq-cta-contact a:hover { opacity: 0.7; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 18px 0; font-size: 14.5px; font-weight: 500; color: var(--text-primary); text-align: left; background: none; border: none; cursor: pointer; transition: color var(--transition); }
+    .faq-q:hover { color: var(--amber); }
+    .faq-icon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; color: var(--text-primary); line-height: 1; transition: background var(--transition), border-color var(--transition), color var(--transition); }
+    .faq-item.open .faq-icon { background: var(--amber); border-color: var(--amber); color: #000; }
+    .faq-a { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding-bottom 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 16px; }
+
+    /* ============ CTA BANNER ============ */
+    .cta-banner { padding: 100px 60px; }
+    .cta-banner-inner { border-radius: 20px; overflow: hidden; position: relative; min-height: 380px; display: flex; align-items: center; }
+    .cta-banner-bg { position: absolute; inset: 0; background: var(--bg-card); }
+    .cta-banner-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .cta-banner-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.08) 100%); }
+    .cta-banner-content { position: relative; z-index: 1; padding: 52px 64px; max-width: 540px; }
+    .cta-banner-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 18px; }
+    .cta-banner-label::before { content: ''; display: inline-block; width: 18px; height: 1.5px; background: var(--amber); border-radius: 2px; }
+    .cta-banner-title { font-size: clamp(24px, 3vw, 40px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin-bottom: 16px; }
+    .cta-banner-sub { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 28px; }
+    .cta-banner-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .btn-white { background: rgba(255,255,255,0.1); color: #fff; border: 1.5px solid rgba(255,255,255,0.22); backdrop-filter: blur(8px); }
+    .btn-white:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+
+    /* ============ CONTACT BAR ============ */
+    .contact-bar { padding: 48px 0; background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .contact-bar-inner { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 12px; }
+    .contact-item-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--amber-glow); border: 1px solid rgba(255,171,0,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-item-icon svg { width: 17px; height: 17px; stroke: var(--amber); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-item-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
+    .contact-item-value { font-size: 13px; color: var(--text-primary); font-weight: 500; line-height: 1.55; }
+    .contact-item-value a { color: inherit; transition: color var(--transition); }
+    .contact-item-value a:hover { color: var(--amber); }
+
+    /* ============ FOOTER ============ */
+    .footer { padding: 68px 60px 36px; border-top: 1px solid var(--border); }
+    .footer-email-bar { text-align: center; margin-bottom: 52px; }
+    .footer-email-bar a { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; letter-spacing: -0.02em; color: var(--amber); transition: opacity var(--transition); }
+    .footer-email-bar a:hover { opacity: 0.7; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 52px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+    .footer-logo-square { width: 30px; height: 30px; border-radius: 8px; position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .footer-logo-square::before { content: ''; position: absolute; inset: -1px; border-radius: 9px; background: linear-gradient(135deg, var(--amber), #FF6B00, var(--amber-dim)); z-index: 0; }
+    .footer-logo-square::after { content: ''; position: absolute; inset: 0; border-radius: 8px; background: var(--bg-card); z-index: 1; }
+    .footer-logo-square svg { position: relative; z-index: 2; width: 15px; height: 15px; }
+    .footer-tagline { font-size: 13px; color: var(--text-secondary); line-height: 1.7; max-width: 250px; margin-bottom: 20px; }
+    .footer-col-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: var(--text-secondary); transition: color var(--transition); }
+    .footer-links a:hover { color: var(--amber); }
+    .footer-contact-item { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.55; }
+    .footer-contact-item a { color: inherit; transition: color var(--transition); }
+    .footer-contact-item a:hover { color: var(--amber); }
+    .footer-wordmark { text-align: center; font-size: clamp(52px, 11vw, 150px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; background: linear-gradient(to bottom, rgba(255,171,0,0.14) 0%, transparent 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-top: 36px; user-select: none; pointer-events: none; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; border-top: 1px solid var(--border); gap: 16px; }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 12px; color: var(--text-muted); transition: color var(--transition); }
+    .footer-bottom-links a:hover { color: var(--amber); }
+
+    /* ============ TABLET ≤ 1024px ============ */
+    @media (max-width: 1024px) {
+      .container { padding: 0 32px; }
+      .nav-inner  { padding: 0 32px; }
+      .hero-inner { padding: 0 32px; }
+      .hero-bento { padding: 16px 32px 48px; }
+      .intro      { padding: 80px 32px; }
+      .properties { padding: 80px 32px; }
+      .how        { padding: 80px 32px; }
+      .services   { padding: 80px 32px; }
+      .testimonials { padding: 80px 32px; }
+      .faq        { padding: 80px 32px; }
+      .cta-banner { padding: 80px 32px; }
+      .footer     { padding: 56px 32px 28px; }
+      .hero-top { grid-template-columns: 1fr; }
+      .hero-right img { height: 320px; }
+      .intro-inner { grid-template-columns: 1fr; gap: 48px; }
+      .how-inner { grid-template-columns: 1fr; }
+      .how-right { position: static; }
+      .properties-grid { grid-template-columns: repeat(2,1fr); }
+      .testimonials-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .testimonial-cards { grid-template-columns: repeat(2,1fr); }
+      .contact-bar-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .faq-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+
+    /* ============ MOBILE ≤ 640px ============ */
+    @media (max-width: 640px) {
+      :root { --nav-h: 60px; --gap: 11px; }
+      .container  { padding: 0 18px; }
+      .nav-inner  { padding: 0 18px; }
+      .nav-links  { display: none; }
+      .nav-cta    { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-logo-text { display: none; }
+
+      .hero { padding-top: calc(var(--nav-h) + 32px); }
+      .hero-inner { padding: 0 18px; }
+      .hero-top { grid-template-columns: 1fr; gap: 24px; margin-bottom: 24px; }
+      .hero-h1 { font-size: 30px; }
+      .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 24px; }
+      .hero-right img { height: 220px; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+
+      .hero-bento { grid-template-columns: 1fr 1fr; padding: 0 18px 36px; gap: 10px; }
+      .bc-stat1 { grid-column: 1; grid-row: auto; }
+      .bc-stat2 { grid-column: 2; grid-row: auto; }
+      .bc-img1  { grid-column: 1/3; grid-row: auto; min-height: 190px; }
+      .bc-img2  { grid-column: 1/3; grid-row: auto; min-height: 170px; }
+      .bc-stat3 { grid-column: 1; grid-row: auto; }
+      .bc-stat4 { grid-column: 2; grid-row: auto; }
+      .bento-stat { min-height: 130px; padding: 16px; }
+      .bento-stat-num { font-size: 32px; }
+
+      .intro      { padding: 56px 18px; }
+      .properties { padding: 56px 18px; }
+      .how        { padding: 56px 18px; }
+      .services   { padding: 56px 18px; }
+      .testimonials { padding: 56px 18px; }
+      .faq        { padding: 56px 18px; }
+      .cta-banner { padding: 56px 18px; }
+      .footer     { padding: 44px 18px 24px; }
+
+      .section-title { font-size: 24px; }
+
+      .intro-inner { grid-template-columns: 1fr; gap: 32px; }
+      .intro-images { grid-template-columns: 1fr; }
+      .intro-img { height: 200px; }
+      .intro-img.tall { grid-row: auto; height: 200px; }
+      .intro-cta .btn { width: 100%; justify-content: center; }
+
+      .properties-grid { grid-template-columns: 1fr; }
+      .prop-card { aspect-ratio: 16/11; }
+      .prop-title { font-size: 17px; }
+
+      .how-inner { grid-template-columns: 1fr; gap: 32px; }
+      .how-right { position: static; order: -1; }
+      .how-img-wrap { height: 220px; }
+
+      .services-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card-featured .service-img { height: 220px; }
+      .service-img { height: 200px; }
+
+      .testimonials-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .testimonial-featured { grid-template-columns: 1fr; min-height: auto; }
+      .testimonial-featured-img { height: 200px; }
+      .testimonial-featured-content { padding: 20px; }
+      .testimonial-quote { font-size: 14px; }
+      .testimonial-cards { grid-template-columns: 1fr; }
+
+      .contact-bar { padding: 32px 0; }
+      .contact-bar-inner { grid-template-columns: 1fr; gap: 18px; }
+
+      .faq-inner { grid-template-columns: 1fr; gap: 32px; }
+      .faq-q { font-size: 14px; padding: 16px 0; }
+
+      .cta-banner-inner { min-height: 320px; }
+      .cta-banner-content { padding: 32px 22px; }
+      .cta-banner-actions { flex-direction: column; gap: 10px; }
+      .cta-banner-actions .btn { width: 100%; justify-content: center; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-email-bar { margin-bottom: 32px; }
+      .footer-wordmark { font-size: clamp(44px, 18vw, 80px); }
+    }
+
+    /* ============ EXTRA SMALL ≤ 380px ============ */
+    @media (max-width: 380px) {
+      .hero-h1 { font-size: 26px; }
+      .hero-bento { grid-template-columns: 1fr; }
+      .bc-stat1, .bc-stat2, .bc-stat3, .bc-stat4, .bc-img1, .bc-img2 { grid-column: 1; grid-row: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-square">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" fill="url(#lg1)"/>
+            <path d="M9 22V14h6v8" fill="rgba(0,0,0,0.35)"/>
+            <defs><linearGradient id="lg1" x1="3" y1="3" x2="21" y2="22" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFAB00"/><stop offset="100%" stop-color="#CC7700"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-prime">PRIME</span>
+          <span class="nav-logo-sub">Properties</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#properties">Properties</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="tel:09820034437" class="btn btn-dark nav-cta">Call Us</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#properties" onclick="closeMobile()">Properties</a>
+    <a href="#services" onclick="closeMobile()">Services</a>
+    <a href="#reviews" onclick="closeMobile()">Reviews</a>
+    <a href="#faq" onclick="closeMobile()">FAQ</a>
+    <a href="tel:09820034437" class="btn btn-dark" onclick="closeMobile()">Call 098200 34437</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-badge reveal">
+            <span class="hero-badge-dot"></span>
+            4.8 on Google
+            <span class="hero-badge-stars">
+              <svg class="hero-badge-star" viewBox="0 0 16 16"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg>
+              <svg class="hero-badge-star" viewBox="0 0 16 16"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg>
+              <svg class="hero-badge-star" viewBox="0 0 16 16"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg>
+              <svg class="hero-badge-star" viewBox="0 0 16 16"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg>
+              <svg class="hero-badge-star" viewBox="0 0 16 16"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg>
+            </span>
+          </div>
+          <h1 class="hero-h1 reveal reveal-delay-1">Navi Mumbai's Most <em>Trusted</em> Real Estate Partner</h1>
+          <p class="hero-sub reveal reveal-delay-2">20+ years of impartiality, honesty and transparency in Commercial & Residential property advisory across Navi Mumbai.</p>
+          <div class="hero-actions reveal reveal-delay-3">
+            <a href="tel:09820034437" class="btn btn-amber">Call: 098200 34437</a>
+            <a href="#properties" class="btn btn-outline">View Properties</a>
+          </div>
+        </div>
+        <div class="hero-right reveal reveal-delay-2">
+          <img src="https://framerusercontent.com/images/li9jF1N383A7zPPvx35eAtmO218.png" alt="Navi Mumbai real estate">
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="hero-ticker-track">
+        <span class="hero-ticker-item">Residential Properties</span><span class="hero-ticker-item">Commercial Properties</span><span class="hero-ticker-item">Tenant Finding</span><span class="hero-ticker-item">Property Advisory</span><span class="hero-ticker-item">20+ Years Experience</span><span class="hero-ticker-item">Navi Mumbai Experts</span><span class="hero-ticker-item">Kopar Khairane</span><span class="hero-ticker-item">Sector 19 & Beyond</span><span class="hero-ticker-item">Residential Properties</span><span class="hero-ticker-item">Commercial Properties</span><span class="hero-ticker-item">Tenant Finding</span><span class="hero-ticker-item">Property Advisory</span><span class="hero-ticker-item">20+ Years Experience</span><span class="hero-ticker-item">Navi Mumbai Experts</span><span class="hero-ticker-item">Kopar Khairane</span><span class="hero-ticker-item">Sector 19 & Beyond</span>
+      </div>
+    </div>
+
+    <div class="hero-bento">
+      <div class="bento-card bc-stat1 reveal">
+        <div class="bento-stat">
+          <div class="bento-stat-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+          <div><div class="bento-stat-num" data-count="20" data-suffix="+">20+</div><div class="bento-stat-label">Years of excellence</div></div>
+        </div>
+      </div>
+      <div class="bento-card bc-stat2 reveal reveal-delay-1">
+        <div class="bento-stat">
+          <div class="bento-stat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div><div class="bento-stat-num" data-count="500" data-suffix="+">500+</div><div class="bento-stat-label">Happy clients</div></div>
+        </div>
+      </div>
+      <div class="bento-card is-image bc-img1 reveal reveal-delay-2">
+        <img src="https://framerusercontent.com/images/qTcn5FJJzTNcJkdfpsmxZhrypAM.png" alt="Premium property">
+      </div>
+      <div class="bento-card is-image bc-img2 reveal reveal-delay-1">
+        <img src="https://framerusercontent.com/images/i3rai7JcuooyWAfSbmSF8Eu2nOg.png" alt="Modern building Navi Mumbai">
+      </div>
+      <div class="bento-card bc-stat3 reveal reveal-delay-2">
+        <div class="bento-stat">
+          <div class="bento-stat-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor" stroke="none"/></svg></div>
+          <div><div class="bento-stat-num">4.8</div><div class="bento-stat-label">Google rating</div></div>
+        </div>
+      </div>
+      <div class="bento-card bc-stat4 reveal reveal-delay-3">
+        <div class="bento-stat">
+          <div class="bento-stat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="bento-stat-num">100%</div><div class="bento-stat-label">Transparent deals</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT — no stat boxes -->
+  <section class="intro container" id="about">
+    <div class="intro-inner">
+      <div class="intro-left">
+        <span class="section-label reveal">About PRIME Properties</span>
+        <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:18px;">Two decades of trusted real estate in Navi Mumbai</h2>
+        <div class="intro-body reveal reveal-delay-2">
+          <p>PRIME Properties India is one of the leading real estate search & advisory firms based in Navi Mumbai, specialising in Commercial & Residential properties across the region.</p>
+          <p>We have redefined business standards through impartiality and honesty — every transaction is carried out with integrity and transparency, ensuring our clients always get the best outcome.</p>
+          <blockquote>"We have redefined business standards through impartiality & honesty. Every transaction is carried out with integrity and transparency."</blockquote>
+        </div>
+        <div class="intro-cta reveal reveal-delay-3">
+          <a href="tel:09820034437" class="btn btn-dark">Talk to our team</a>
+        </div>
+      </div>
+      <div class="intro-right reveal">
+        <div class="intro-images">
+          <div class="intro-img tall"><img src="https://framerusercontent.com/images/qTcn5FJJzTNcJkdfpsmxZhrypAM.png" alt="Property exterior"></div>
+          <div class="intro-img"><img src="https://framerusercontent.com/images/i3rai7JcuooyWAfSbmSF8Eu2nOg.png" alt="Modern building"></div>
+          <div class="intro-img"><img src="https://framerusercontent.com/images/a7NvxO8HjSrd4X0YrIaWOpU.png" alt="Property interior"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTIES — no Enquire Now button -->
+  <section class="properties container" id="properties">
+    <div class="properties-header reveal">
+      <span class="section-label">Properties</span>
+      <h2 class="section-title reveal reveal-delay-1">Premium properties across<br>Navi Mumbai</h2>
+      <p class="section-sub reveal reveal-delay-2">From residential flats to commercial offices — we help you find, evaluate, and secure the right property.</p>
+    </div>
+    <div class="properties-grid">
+      <a href="#contact" class="prop-card reveal">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/wVxmgjqF9LpzO1rKSBxPp74jAEs.jpeg" alt="Residential flat">
+        <div class="prop-card-overlay"></div><span class="prop-badge">For Sale</span>
+        <div class="prop-body"><h4 class="prop-title">Residential Flat</h4><p class="prop-desc">Spacious apartment in prime Navi Mumbai location with modern amenities.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>2–3 BHK</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Kopar Khairane</span></div></div>
+      </a>
+      <a href="#contact" class="prop-card reveal reveal-delay-1">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/hQl3RBSTjmCwjThLO8eOWbwCDE.jpeg" alt="Commercial office">
+        <div class="prop-card-overlay"></div><span class="prop-badge">For Rent</span>
+        <div class="prop-body"><h4 class="prop-title">Commercial Office</h4><p class="prop-desc">Professional office in Vashi with modern infrastructure and prime business location.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Office</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Vashi</span></div></div>
+      </a>
+      <a href="#contact" class="prop-card reveal reveal-delay-2">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/RkF3Plf9k1duAuFnZySFLtjK3hs.jpg" alt="Luxury apartment">
+        <div class="prop-card-overlay"></div><span class="prop-badge">For Sale</span>
+        <div class="prop-body"><h4 class="prop-title">Luxury Apartment</h4><p class="prop-desc">Premium high-rise with city views, gym, pool and landscaped gardens.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>3–4 BHK</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Sector 19</span></div></div>
+      </a>
+      <a href="#contact" class="prop-card reveal">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/KkVhjPfGHVptgbqwqOf8N7QYPPY.jpeg" alt="Rental flat">
+        <div class="prop-card-overlay"></div><span class="prop-badge">For Rent</span>
+        <div class="prop-body"><h4 class="prop-title">Rental Flat</h4><p class="prop-desc">Well-maintained flat near schools, hospitals and transport links.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>1–2 BHK</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Kopar Khairane</span></div></div>
+      </a>
+      <a href="#contact" class="prop-card reveal reveal-delay-1">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/UPDafFRY6wjaqUOpVuSl95dkvw.jpeg" alt="Commercial shop">
+        <div class="prop-card-overlay"></div><span class="prop-badge">For Sale</span>
+        <div class="prop-body"><h4 class="prop-title">Commercial Shop</h4><p class="prop-desc">Prime retail space with high footfall and excellent visibility.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>Shop</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Navi Mumbai</span></div></div>
+      </a>
+      <a href="#contact" class="prop-card reveal reveal-delay-2">
+        <img class="prop-card-img" src="https://framerusercontent.com/images/3HJfgjy7DJHqpC6vh5PlrUv1Y.jpg" alt="Investment property">
+        <div class="prop-card-overlay"></div><span class="prop-badge">Investment</span>
+        <div class="prop-body"><h4 class="prop-title">Investment Property</h4><p class="prop-desc">High-return investment in a rapidly growing micro-market.</p><div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>High ROI</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Sector 19</span></div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how container">
+    <div class="how-inner">
+      <div class="how-left">
+        <span class="section-label reveal">How it works</span>
+        <h2 class="section-title reveal reveal-delay-1">Find and secure your ideal property without hassle</h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-top:12px;">PRIME Properties guides you through every step — from search to handover — with complete transparency.</p>
+        <div class="how-tabs" id="howTabs">
+          <div class="how-tab active" data-index="0">
+            <div class="how-tab-num">Step 01</div>
+            <div class="how-tab-title">Share your requirements</div>
+            <div class="how-tab-body">Tell us your budget, location preference, property type, and timeline. We understand your needs fully before presenting any options.</div>
+          </div>
+          <div class="how-tab" data-index="1">
+            <div class="how-tab-num">Step 02</div>
+            <div class="how-tab-title">We find & shortlist</div>
+            <div class="how-tab-body">Using our 20+ year network across Navi Mumbai, we identify the best matches and arrange visits at your convenience.</div>
+          </div>
+          <div class="how-tab" data-index="2">
+            <div class="how-tab-num">Step 03</div>
+            <div class="how-tab-title">Close with confidence</div>
+            <div class="how-tab-body">We facilitate negotiations, handle documentation, and ensure the entire deal is transparent. We stay by your side until handover is complete.</div>
+          </div>
+        </div>
+      </div>
+      <div class="how-right reveal reveal-delay-2">
+        <div class="how-img-wrap"><img id="howImgEl" src="https://framerusercontent.com/images/a7NvxO8HjSrd4X0YrIaWOpU.png" alt="How PRIME Properties works"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services container" id="services">
+    <div class="services-header">
+      <div><span class="section-label reveal">Services</span><h2 class="section-title reveal reveal-delay-1">Expert support for buying,<br>renting &amp; selling</h2></div>
+      <p class="section-sub reveal reveal-delay-2">Comprehensive real estate advisory with integrity at every step.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card service-card-featured reveal">
+        <div class="service-img"><img src="https://framerusercontent.com/images/P7stjNByvw9Aa7a5xnEARkPENE.png" alt="Tenant finding"></div>
+        <div class="service-body"><div class="service-title">Tenant Finding</div><div class="service-desc">We identify quality tenants quickly, screening carefully so your property is occupied by the right people.</div></div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-img"><img src="https://framerusercontent.com/images/BQHu5QfHgABGudI78MfiFwCoxI.png" alt="Property buying"></div>
+        <div class="service-body"><div class="service-title">Property Buying</div><div class="service-desc">Expert guidance to find and buy residential or commercial properties at the right price.</div></div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-img"><img src="https://framerusercontent.com/images/UsEPsEXfHpKt9JxF313yvEzUjAQ.png" alt="Property selling"></div>
+        <div class="service-body"><div class="service-title">Property Selling</div><div class="service-desc">We proactively market your property, negotiate the best deal, and manage the entire sale process.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS — uniform section header -->
+  <section class="testimonials container" id="reviews">
+    <div class="testimonials-header reveal">
+      <div class="testimonials-header-left">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title" style="margin-top:4px;">What our clients say</h2>
+        <p class="section-sub" style="margin-top:10px;">Real feedback from real clients — built on trust, transparency, and exceptional service.</p>
+      </div>
+      <div class="google-rating-badge">
+        <div class="google-g">G</div>
+        4.8 · Google Reviews
+      </div>
+    </div>
+
+    <div class="testimonial-featured reveal">
+      <div class="testimonial-featured-img"><img id="featuredImg" src="https://framerusercontent.com/images/mMVXzQIzsZasD3HLsCQV0X2ApHM.png" alt="Client"></div>
+      <div class="testimonial-featured-content">
+        <p class="testimonial-quote" id="featuredQuote">I had an exceptional experience with PRIME Properties while searching for a rental flat. They were extremely professional, patient, and attentive. They personally negotiated with the owner to have the entire flat repainted before my move-in. Their proactive approach and willingness to help at every step made the entire renting process seamless.</p>
+        <div class="testimonial-featured-footer">
+          <div><div class="testimonial-author" id="featuredAuthor">Mohd Adeel Siddiqui</div><div class="testimonial-role" id="featuredRole">Rental client · Local Guide</div></div>
+          <div class="testimonial-nav">
+            <button class="testimonial-nav-btn" onclick="prevTestimonial()" aria-label="Previous">&#8592;</button>
+            <button class="testimonial-nav-btn" onclick="nextTestimonial()" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-cards">
+      <div class="t-card reveal">
+        <div class="t-stars"><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg></div>
+        <p class="t-card-quote">"Very proactive in advertising the property. Helped a lot in getting the right deal, and managed the whole process smoothly even though we were not in town."</p>
+        <div class="t-card-author"><div class="t-card-avatar">K</div><div><div class="t-card-name">Kalpana Chawriya</div><div class="t-card-role">Property owner · 2 months ago</div></div></div>
+      </div>
+      <div class="t-card reveal reveal-delay-1">
+        <div class="t-stars"><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg></div>
+        <p class="t-card-quote">"Genuine and reliable professional who guided us through every step. Calm, knowledgeable, and solution-oriented — highly recommend Amit!"</p>
+        <div class="t-card-author"><div class="t-card-avatar">G</div><div><div class="t-card-name">Giya Tolani</div><div class="t-card-role">Property seller · 8 months ago</div></div></div>
+      </div>
+      <div class="t-card reveal reveal-delay-2">
+        <div class="t-stars"><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg><svg class="t-star" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5l1.8 5.4H16l-4.6 3.3 1.8 5.4L8 11.4l-5.2 3.2 1.8-5.4L0 5.9h6.2z"/></svg></div>
+        <p class="t-card-quote">"Thanks to Sooraj for helping us find the right house on rent. Showed us all good options as per our requirements — great team!"</p>
+        <div class="t-card-author"><div class="t-card-avatar">J</div><div><div class="t-card-name">Jyoti KM Srivastava</div><div class="t-card-role">Rental client · Local Guide</div></div></div>
+      </div>
+    </div>
+    <div class="reviews-cta reveal"><a href="https://www.google.com/maps/search/PRIME+Properties+Kopar+Khairane" target="_blank" rel="noopener">View all Google reviews &#8594;</a></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq container" id="faq">
+    <div class="faq-inner">
+      <div class="faq-left">
+        <span class="section-label reveal">FAQ</span>
+        <h2 class="section-title reveal reveal-delay-1">Common questions answered</h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-top:12px;">Everything you need to know about working with PRIME Properties.</p>
+        <div class="faq-cta-box reveal reveal-delay-3">
+          <div class="faq-icon-circle"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg></div>
+          <div class="faq-cta-label">Still have questions? Speak directly with our team.</div>
+          <a href="tel:09820034437" class="btn btn-dark" style="width:100%;justify-content:center;">Call 098200 34437</a>
+          <div class="faq-cta-contact" style="margin-top:12px;">Opens 10:30 am daily<br><a href="https://maps.google.com/?q=Office+No+02+Ashirwad+Bldg+Kopar+Khairane+Navi+Mumbai" target="_blank" rel="noopener">Office No 02, Ashirwad Bldg, Sector 19, Kopar Khairane, Navi Mumbai</a></div>
+        </div>
+      </div>
+      <div class="faq-list reveal reveal-delay-2">
+        <div class="faq-item open"><button class="faq-q" onclick="toggleFaq(this)">What areas do you cover in Navi Mumbai?<span class="faq-icon">−</span></button><div class="faq-a">We are based in Kopar Khairane, Sector 19, and operate across Navi Mumbai including Vashi, Belapur, Kharghar, Panvel and surrounding areas for both commercial and residential properties.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you help with both buying and renting?<span class="faq-icon">+</span></button><div class="faq-a">Yes — PRIME Properties handles all aspects of real estate including buying, selling, and renting for both residential and commercial properties. We guide you through every stage.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can you find tenants for my property?<span class="faq-icon">+</span></button><div class="faq-a">Absolutely. Our tenant-finding service is one of our most popular. We advertise your property, screen tenants, and help you secure reliable, high-quality tenants quickly.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if I'm not in Navi Mumbai during the process?<span class="faq-icon">+</span></button><div class="faq-a">No problem at all. We've managed entire deals smoothly for clients who weren't in town. We keep you updated at every step and handle the details on your behalf.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are your dealings fully transparent?<span class="faq-icon">+</span></button><div class="faq-a">Transparency and integrity are at the heart of everything we do. Over 20 years, every transaction has been conducted with honesty and impartiality — no hidden fees or surprises.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner container" id="contact">
+    <div class="cta-banner-inner reveal">
+      <div class="cta-banner-bg"><img src="https://framerusercontent.com/images/8ld3D7wcAqmfQzqcRH6abXSdo.png" alt="Premium property Navi Mumbai"></div>
+      <div class="cta-banner-overlay"></div>
+      <div class="cta-banner-content">
+        <span class="cta-banner-label">Get started today</span>
+        <h2 class="cta-banner-title">Find your perfect property in Navi Mumbai</h2>
+        <p class="cta-banner-sub">20+ years of expertise, honesty, and local knowledge — at your service.</p>
+        <div class="cta-banner-actions">
+          <a href="tel:09820034437" class="btn btn-amber">Call 098200 34437</a>
+          <a href="#properties" class="btn btn-white">Browse Properties</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BAR -->
+  <div class="contact-bar">
+    <div class="container">
+      <div class="contact-bar-inner">
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.09 6.09l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.07 15h-.15z"/></svg></div>
+          <div><div class="contact-item-label">Phone</div><div class="contact-item-value"><a href="tel:09820034437">098200 34437</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="contact-item-label">Office</div><div class="contact-item-value"><a href="https://maps.google.com/?q=Office+No+02+Ashirwad+Bldg+Kopar+Khairane+Navi+Mumbai" target="_blank" rel="noopener">Office No 02, Ashirwad Bldg, Kopar Khairane Rd, Sector 19, Navi Mumbai 400709</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="contact-item-label">Hours</div><div class="contact-item-value">Opens 10:30 am daily</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer container">
+    <div class="footer-email-bar"><a href="tel:09820034437">98200 34437</a></div>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-square"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" fill="url(#fl1)"/><defs><linearGradient id="fl1" x1="3" y1="3" x2="21" y2="22" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFAB00"/><stop offset="100%" stop-color="#CC7700"/></linearGradient></defs></svg></div>
+          PRIME Properties
+        </div>
+        <p class="footer-tagline">One of Navi Mumbai's leading real estate advisory firms — 20+ years of trusted service with integrity.</p>
+        <a href="tel:09820034437" class="btn btn-dark" style="font-size:13px;padding:10px 20px;">Call Us Now</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links"><li><a href="#home">Home</a></li><li><a href="#about">About us</a></li><li><a href="#properties">Properties</a></li><li><a href="#services">Services</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links"><li><a href="#services">Tenant Finding</a></li><li><a href="#services">Property Buying</a></li><li><a href="#services">Property Selling</a></li><li><a href="#services">Commercial</a></li><li><a href="#services">Residential</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-item"><a href="tel:09820034437">098200 34437</a></div>
+        <div class="footer-contact-item"><a href="https://maps.google.com/?q=Office+No+02+Ashirwad+Bldg+Kopar+Khairane+Navi+Mumbai" target="_blank" rel="noopener">Sector 19, Kopar Khairane,<br>Navi Mumbai 400709</a></div>
+        <div class="footer-contact-item" style="color:var(--text-muted);font-size:11.5px;">Opens 10:30 am daily</div>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">PRIME</div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 PRIME Properties India. All rights reserved.</span>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('navMobile');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+    function closeMobile() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+    document.addEventListener('click', (e) => { if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile(); });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    function animateCount(el) {
+      const target = parseInt(el.dataset.count, 10), suffix = el.dataset.suffix || '', start = performance.now();
+      function update(now) {
+        const p = Math.min((now - start) / 1400, 1), ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(ease * target).toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+    const countEls = document.querySelectorAll('[data-count]');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObserver.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    countEls.forEach(el => countObserver.observe(el));
+
+    const howTabs = document.querySelectorAll('.how-tab');
+    const howImgEl = document.getElementById('howImgEl');
+    const howImages = ['https://framerusercontent.com/images/a7NvxO8HjSrd4X0YrIaWOpU.png','https://framerusercontent.com/images/c8vHVwCBbp2TA4THp67GEByKZY.png','https://framerusercontent.com/images/VAlHx1AVJyd3c8kzexEGctOKvdc.png'];
+    howTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        howTabs.forEach(t => t.classList.remove('active')); tab.classList.add('active');
+        howImgEl.style.opacity = '0';
+        setTimeout(() => { howImgEl.src = howImages[i]; howImgEl.style.opacity = '1'; }, 200);
+      });
+    });
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item'), isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-icon').textContent = '+'; });
+      if (!isOpen) { item.classList.add('open'); btn.querySelector('.faq-icon').textContent = '−'; }
+    }
+
+    const testimonials = [
+      { quote: 'I had an exceptional experience with PRIME Properties while searching for a rental flat. They were extremely professional, patient, and attentive. They personally negotiated with the owner to have the entire flat repainted before my move-in. Their proactive approach and willingness to help at every step made the entire renting process seamless.', author: 'Mohd Adeel Siddiqui', role: 'Rental client · Local Guide', img: 'https://framerusercontent.com/images/mMVXzQIzsZasD3HLsCQV0X2ApHM.png' },
+      { quote: 'We have been working with Prime Properties for a long time now and they are very professional and trustworthy. Raja Aswani has been advising and providing us very good support all these years.', author: 'Aditi Choudhury', role: 'Long-term client', img: 'https://framerusercontent.com/images/rpaL7l6uHOyMyMxxnlerEhkjneM.png' },
+      { quote: 'Very professional service. Well networked and well resourced to address all your real estate needs. We had a very positive experience and would definitely recommend them.', author: 'Prashant Raikuvar', role: 'Property client', img: 'https://framerusercontent.com/images/6cpsdODPwFglZwcH5crVrCvhU0.png' }
+    ];
+    let cur = 0;
+    const fQ = document.getElementById('featuredQuote'), fA = document.getElementById('featuredAuthor'), fR = document.getElementById('featuredRole'), fI = document.getElementById('featuredImg');
+    [fQ, fA, fR, fI].forEach(el => el.style.transition = 'opacity 0.25s ease');
+    function switchTestimonial(idx) {
+      cur = (idx + testimonials.length) % testimonials.length;
+      const t = testimonials[cur];
+      [fQ, fA, fR, fI].forEach(el => el.style.opacity = '0');
+      setTimeout(() => { fQ.textContent = t.quote; fA.textContent = t.author; fR.textContent = t.role; fI.src = t.img; [fQ, fA, fR, fI].forEach(el => el.style.opacity = '1'); }, 250);
+    }
+    function prevTestimonial() { switchTestimonial(cur - 1); }
+    function nextTestimonial() { switchTestimonial(cur + 1); }
+    setInterval(() => nextTestimonial(), 7000);
+  </script>
+</body>
+</html>
